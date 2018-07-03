@@ -18,6 +18,15 @@ scp config/*private.pem.key $SCP_LOCATION
 scp config/*Authority*.pem $SCP_LOCATION
 ```
 
+# To use supervisor to make sure the main file runs on boot and restarts automatically
+
+```
+sudo apt-get install supervisor
+sudo ln -s /home/pi/ambient-sensor/config/supervisor-ambient-sensor.conf /etc/supervisor/conf.d/ambient-sensor.conf
+sudo supervisorctl reread
+sudo supervisorctl update
+```
+
 # Resize example
 
 https://github.com/jquast/blessed/blob/master/bin/on_resize.py
