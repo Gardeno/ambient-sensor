@@ -4,7 +4,9 @@
 
 2) Download your Thing's certificates (private, cert, and CA) and put them in config
 
-3) Run `main.py`
+3) Run `pip install -r requirements.txt`
+
+4) Run `main.py`
 
 # To copy certs to a Raspberry Pi using SCP
 
