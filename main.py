@@ -2,6 +2,7 @@ from Adafruit_SHT31 import *
 import time
 import logging
 import glob
+import json
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient, AWSIoTMQTTShadowClient
 from config.settings import IOT_CLIENT_ID, IOT_ENDPOINT
@@ -33,7 +34,7 @@ def build_shadow_client():
 
 
 def shadow_callback(payload, responseStatus, token):
-    passa
+    pass
 
 
 def main():
@@ -67,10 +68,10 @@ def main():
             print('Temp             = {0:0.3f} deg C'.format(degrees))
             print('Humidity         = {0:0.2f} %'.format(humidity))
             if iot_client:
-                iot_client_shadow.shadowUpdate({
+                iot_client_shadow.shadowUpdate(json.dumps({
                     'temperature': degrees,
                     'humidity': humidity,
-                }, shadow_callback, 1000)
+                }), shadow_callback, 1000)
         time.sleep(5)
 
 
