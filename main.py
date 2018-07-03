@@ -4,7 +4,7 @@ import logging
 import glob
 import json
 
-from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient, AWSIoTMQTTShadowClient
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient
 from config.settings import IOT_CLIENT_ID, IOT_ENDPOINT
 
 logging.basicConfig(level=logging.INFO)
@@ -56,7 +56,7 @@ def main():
         iot_client.connect()
         logging.info('Connected to IoT!')
         logging.info('Creating shadow handler')
-        iot_client_shadow = iot_client.createShadowHandlerWithName('Data', True)
+        iot_client_shadow = iot_client.createShadowHandlerWithName(IOT_CLIENT_ID, True)
         logging.info('Created shadow handler!')
     else:
         logging.warning('Unable to connect to IoT')
