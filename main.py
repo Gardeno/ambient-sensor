@@ -69,8 +69,12 @@ def main():
             print('Humidity         = {0:0.2f} %'.format(humidity))
             if iot_client:
                 iot_client_shadow.shadowUpdate(json.dumps({
-                    'temperature': degrees,
-                    'humidity': humidity,
+                    'state': {
+                        'desired': {
+                            'temperature': degrees,
+                            'humidity': humidity,
+                        }
+                    }
                 }), shadow_callback, 1000)
         time.sleep(5)
 
