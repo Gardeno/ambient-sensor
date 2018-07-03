@@ -70,7 +70,7 @@ def main():
             if iot_client:
                 iot_client_shadow.shadowUpdate(json.dumps({
                     'state': {
-                        'desired': {
+                        'reported': {
                             'temperature': degrees,
                             'humidity': humidity,
                         }
