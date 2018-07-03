@@ -32,26 +32,8 @@ def build_shadow_client():
     return myShadowClient
 
 
-def build_mqtt_client():
-    # For certificate based connection
-    myMQTTClient = AWSIoTMQTTClient(IOT_CLIENT_ID)
-    # For Websocket connection
-    # myMQTTClient = AWSIoTMQTTClient("myClientID", useWebsocket=True)
-    # Configurations
-    # For TLS mutual authentication
-    myMQTTClient.configureEndpoint(IOT_ENDPOINT, 8883)
-    # For Websocket
-    # myMQTTClient.configureEndpoint("YOUR.ENDPOINT", 443)
-    # For TLS mutual authentication with TLS ALPN extension
-    # myMQTTClient.configureEndpoint("YOUR.ENDPOINT", 443)
-    myMQTTClient.configureCredentials(ca_path[0], key_path[0], cert_path[0])
-    # For Websocket, we only need to configure the root CA
-    # myMQTTClient.configureCredentials("YOUR/ROOT/CA/PATH")
-    myMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
-    myMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
-    myMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
-    myMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
-    return myMQTTClient
+def shadow_callback(payload, responseStatus, token):
+    passa
 
 
 def main():
@@ -72,6 +54,9 @@ def main():
         logging.info('Connecting to IoT')
         iot_client.connect()
         logging.info('Connected to IoT!')
+        logging.info('Creating shadow handler')
+        iot_client_shadow = iot_client.createShadowHandlerWithName('Data', True)
+        logging.info('Created shadow handler!')
     else:
         logging.warning('Unable to connect to IoT')
 
@@ -82,10 +67,10 @@ def main():
             print('Temp             = {0:0.3f} deg C'.format(degrees))
             print('Humidity         = {0:0.2f} %'.format(humidity))
             if iot_client:
-                iot_client.shadowUpdate({
+                iot_client_shadow.shadowUpdate({
                     'temperature': degrees,
                     'humidity': humidity,
-                })
+                }, shadow_callback, 1000)
         time.sleep(5)
 
 
