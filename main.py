@@ -81,6 +81,11 @@ def main():
             humidity = sensor.read_humidity()
             print('Temp             = {0:0.3f} deg C'.format(degrees))
             print('Humidity         = {0:0.2f} %'.format(humidity))
+            if iot_client:
+                iot_client.shadowUpdate({
+                    'temperature': degrees,
+                    'humidity': humidity,
+                })
         time.sleep(5)
 
 
