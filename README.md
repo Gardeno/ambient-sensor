@@ -23,8 +23,8 @@ scp config/*Authority*.pem $SCP_LOCATION
 ```
 sudo apt-get install supervisor
 sudo ln -s /home/pi/ambient-sensor/config/supervisor-ambient-sensor.conf /etc/supervisor/conf.d/ambient-sensor.conf
-sudo supervisorctl reread
-sudo supervisorctl update
+sudo service supervisor restart
+tail -f /var/log/supervisor/ambient_sensor*
 ```
 
 # Resize example
