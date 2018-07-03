@@ -34,7 +34,7 @@ def build_shadow_client():
 
 
 def shadow_callback(payload, responseStatus, token):
-    pass
+    logging.info('Received shadow update response with status {} and payload'.format(responseStatus, payload))
 
 
 def main():
