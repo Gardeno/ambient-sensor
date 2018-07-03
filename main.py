@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from Adafruit_SHT31 import *
 from common import build_shadow_client
 import time
