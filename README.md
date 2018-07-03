@@ -9,8 +9,11 @@
 # To copy certs to a Raspberry Pi using SCP
 
 ```
-export SCP_LOCATION=pi@192.168.86.29:~/ambient-sensor/config/
-scp './config/\*certificate.pem.crt' $SCP_LOCATION
+export SCP_LOCATION="pi@192.168.86.29:~/ambient-sensor/config"
+scp config/settings.py $SCP_LOCATION
+scp config/*certificate.pem.crt $SCP_LOCATION
+scp config/*private.pem.key $SCP_LOCATION
+scp config/*Authority*.pem $SCP_LOCATION
 ```
 
 # Resize example
