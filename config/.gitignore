@@ -1,0 +1,5 @@
+*certificate.pem.crt
+*private.pem.key
+*public.pem.key
+*Authority*.pem
+settings.py
