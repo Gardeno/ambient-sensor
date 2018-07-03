@@ -17,9 +17,9 @@ def main():
         return
 
     shadow_client.connect()
-    shadow_client_shadow = shadow_client.createShadowHandlerWithName(IOT_CLIENT_ID, False)
+    # shadow_client_shadow = shadow_client.createShadowHandlerWithName(IOT_CLIENT_ID, False)
 
-    shadow_client_shadow.shadowGet(shadow_callback, IOT_SHADOW_TIMEOUT_SECONDS)
+    #shadow_client_shadow.shadowGet(shadow_callback, IOT_SHADOW_TIMEOUT_SECONDS)
 
 
 if __name__ == '__main__':

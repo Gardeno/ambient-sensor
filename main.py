@@ -3,6 +3,7 @@ from common import build_shadow_client
 import time
 import logging
 import json
+import sys
 
 from config.settings import IOT_CLIENT_ID, IOT_SHADOW_TIMEOUT_SECONDS
 
@@ -38,7 +39,7 @@ def main():
             humidity = sensor.read_humidity()
             print('Temp             = {0:0.3f} deg C'.format(degrees))
             print('Humidity         = {0:0.2f} %'.format(humidity))
-            if shadow_client:
+            if shadow_client and shadow_client_shadow:
                 shadow_client_shadow.shadowUpdate(json.dumps({
                     'state': {
                         'reported': {
@@ -51,4 +52,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt as exception:
+        logging.info('Exiting')
+        sys.exit(0)
